@@ -45,6 +45,11 @@ public class Dealership {
         return null;
     }
 
+    //hands back
+    public ArrayList<Vehicle> getAllVehicles(){
+        return this.inventory;
+    }
+
     //method to add a vehicle
     public void addVehicle( Vehicle theVehicle) {
         this.inventory.add(Vehicle);
