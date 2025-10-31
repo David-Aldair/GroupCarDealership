@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -44,17 +45,24 @@ public class UserInterface {
             int menuChoice = theScanner.nextInt();
 
             switch(menuChoice){
-                case 1: this.processGetByPriceRequest();
-                case 2:
+                case 1: this.processGetByPriceRequest();break;
+                case 2: this.processGetByMakeModelRequest();break;
+                case 3: this.processGetByYearRequest();break;
+                case 4: this.processGetByColorRequest();break;
+                case 5: this.processGetByMileageRequest();break;
+                case 6: this.processGetByVehicleTypeRequest();break;
+                case 7: this.processGetAllVehiclesRequest();break;
+                case 8: this.processAddVehicleRequest();break;
+                case 9: this.processRemoveVehicleRequest();break;
+                case 99:
+                    System.out.println("Goodbye, come again!");
+                    menuRunning = false;
+                    break;
+
+                default:
+                    System.out.println("INVALID OPTION: TRY AGAIN!");
             }
-
-
-
-
         }
-
-
-
     }
 
     public void processGetByPriceRequest(){}
@@ -69,7 +77,9 @@ public class UserInterface {
 
     public void processGetByVehicleTypeRequest(){}
 
-    public void processGetAllVehiclesRequest(){}
+    public void processGetAllVehiclesRequest(){
+        this.displayAllVehicles(theDealership.getAllVehicles());
+    }
 
     public void processAddVehicleRequest(){}
 
@@ -85,7 +95,18 @@ public class UserInterface {
 
     }
 
-    private void displayAllVehicles(){}
+    //method to display all vehicles
+    private void displayAllVehicles(ArrayList<Vehicle>theVehicles){
+
+        //we need to loop over all those vehicles to display
+        for(Vehicle currentVehicle : theVehicles){
+            //Call the toString method to get a nice display of the vehicle data
+            System.out.println(currentVehicle);
+        }
+
+
+
+    }
 
 
 }

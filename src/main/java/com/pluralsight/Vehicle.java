@@ -9,7 +9,7 @@ public class Vehicle {
     private String model;
     private String vehicleType;
     private String color;
-    private int odotemeter;
+    private int odometer;
     private double price;
 
     //constructor to instantiate these properties
@@ -21,7 +21,7 @@ public class Vehicle {
         this.model = model;
         this.vehicleType = vehicleType;
         this.color = color;
-        this.odotemeter = odotemeter;
+        this.odometer = odotemeter;
         this.price = price;
     }
 
@@ -51,10 +51,16 @@ public class Vehicle {
     }
 
     public int getOdotemeter() {
-        return odotemeter;
+        return odometer;
     }
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public String toString() {
+        return vin + " | " + year + " | " + make + " | " + model + " | " +
+                vehicleType + " | " + color + " | " + odometer + " | $" + price;
     }
 }
