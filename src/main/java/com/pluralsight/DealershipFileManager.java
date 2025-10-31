@@ -71,32 +71,10 @@ public class DealershipFileManager {
 
             //do this if it fails
             System.out.println("Error: File " + exception.getMessage());
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
         return theDealership;
     }
-
-
-
-
     //saves the dealership to csv file
     public void saveDealership(Dealership theDealership){
-
     }
-
-
-
-
 }
