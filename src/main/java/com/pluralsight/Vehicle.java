@@ -14,14 +14,14 @@ public class Vehicle {
 
     //constructor to instantiate these properties
     public Vehicle(int vin, int year, String make, String model, String vehicleType,
-                   String color, int odotemeter, double price) {
+                   String color, int odometer, double price) {
         this.vin = vin;
         this.year = year;
         this.make = make;
         this.model = model;
         this.vehicleType = vehicleType;
         this.color = color;
-        this.odometer = odotemeter;
+        this.odometer = odometer;
         this.price = price;
     }
 
@@ -50,7 +50,7 @@ public class Vehicle {
         return color;
     }
 
-    public int getOdotemeter() {
+    public int getOdometer() {
         return odometer;
     }
 

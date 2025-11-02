@@ -1,9 +1,6 @@
 package com.pluralsight;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class DealershipFileManager {
 
@@ -74,7 +71,29 @@ public class DealershipFileManager {
         }
         return theDealership;
     }
-    //saves the dealership to csv file
-    public void saveDealership(Dealership theDealership){
+    // Saves the entire dealership inventory back into the CSV file.
+    // Uses try-with-resources so FileWriter closes automatically.
+    public void saveDealership(Dealership dealership) {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+
+            // Write the dealership info on the first line
+            writer.write(dealership.getName() + "|" +
+                            dealership.getAddress() + "|" +
+                            dealership.getPhone() + "\n");
+            // Write each vehicle in inventory line by line
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+
+                writer.write(vehicle.getVin() + "|" +
+                                vehicle.getYear() + "|" +
+                                vehicle.getMake() + "|" +
+                                vehicle.getModel() + "|" +
+                                vehicle.getVehicleType() + "|" +
+                                vehicle.getColor() + "|" +
+                                vehicle.getOdometer() + "|" +
+                                vehicle.getPrice() + "\n");
+            }
+        } catch (Exception e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
     }
 }
