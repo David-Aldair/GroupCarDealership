@@ -170,5 +170,7 @@ public class Dealership {
     }
 
     //method to remove a vehicle
-    public void removeVehicle(Vehicle theVehicle){}
+    public void removeVehicle(Vehicle theVehicle){
+        this.inventory.remove(theVehicle);
+    }
 }

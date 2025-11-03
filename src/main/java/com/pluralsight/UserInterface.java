@@ -73,13 +73,13 @@ public class UserInterface {
         System.out.println("What price range are you looking for, pick the minimum: ");
 
         //storing the answer
-        double minPrice = theScanner.nextDouble();
+        double minPrice = Double.parseDouble(theScanner.nextLine());
 
         //ask the user for the max price
         System.out.println("Pick the the maximum: ");
 
         //storing the answer
-        double maxPrice = theScanner.nextDouble();
+        double maxPrice = Double.parseDouble(theScanner.nextLine());
 
         this.displayAllVehicles(theDealership.getVehiclePrice(minPrice, maxPrice ));
 
@@ -123,13 +123,13 @@ public class UserInterface {
         System.out.println("What year are you looking for, Enter a minimum : ");
 
         //storing the answer
-        int minYear = theScanner.nextInt();
+        int minYear = Integer.parseInt(theScanner.nextLine());
 
         //ask the user what model they are looking for
         System.out.println("Enter a maximum : ");
 
         //storing the answer
-        int maxYear = theScanner.nextInt();
+        int maxYear = Integer.parseInt(theScanner.nextLine());
 
         this.displayAllVehicles(theDealership.getVehicleYear(minYear, maxYear ));
         theScanner.nextLine();
@@ -172,13 +172,13 @@ public class UserInterface {
         System.out.println("What amount of mileage are you looking for, Enter minimum : ");
 
         //storing the answer
-        int minMileage = theScanner.nextInt();
+        int minMileage = Integer.parseInt(theScanner.nextLine());
 
         //asking the user for the max amount of mileage
         System.out.println("Enter the maximum: ");
 
         //storing the answer
-        int maxMileage = theScanner.nextInt();
+        int maxMileage = Integer.parseInt(theScanner.nextLine());
 
         ArrayList<Vehicle>matches = theDealership.getVehicleMileage(minMileage, maxMileage);
 
@@ -222,7 +222,7 @@ public class UserInterface {
         //creating a scanner
         Scanner theScanner = new Scanner(System.in);
 
-        //asking the user for each piece of vehicle info that we need
+        //asking the user for each piece of vehicle info that is needed
         //we need a vin, year, make, model, vehicle type, color, odometer, and price
         System.out.println("Enter the vin number: ");
         int vinNum = Integer.parseInt(theScanner.nextLine());
@@ -263,12 +263,56 @@ public class UserInterface {
         System.out.println();
         System.out.println("Press enter to return to the main menu");
         theScanner.nextLine();
+    }
 
+    public void processRemoveVehicleRequest(){
+
+        //creating a scanner
+        Scanner theScanner = new Scanner(System.in);
+
+        //ask the user for the vin number to remove the vehicle because it's the easiest thing
+        //instead of asking it tons of questions you just ask one
+        System.out.println("Enter the vin number of the vehicle: ");
+        int vinNum = Integer.parseInt(theScanner.nextLine());
+
+        //setting this variable to null
+        //if the vehicle is found its stored here
+        Vehicle vehicleToRemove = null;
+
+        //loop through each vehicle in the inventory
+        for(Vehicle vehicle : theDealership.getAllVehicles()){
+
+            //check if the current vehicle matches the vin number the user typed
+            if(vehicle.getVin()== vinNum ){
+
+                //if it's the same it saves to thos variable
+                vehicleToRemove = vehicle;
+            }
+        }
+
+        //if the vehicle is found remove it
+        if(vehicleToRemove != null){
+
+            //removing it from the dealership inventory
+            theDealership.removeVehicle(vehicleToRemove);
+
+            System.out.println();
+
+            //save the updated inventory back to the csv file
+            //because if it isn't saved, the removal disappears when the program closes
+            DealershipFileManager dfm = new DealershipFileManager();
+            dfm.saveDealership(theDealership);
+
+        }else{
+
+            //if the vin doesn't exist, tell the user
+            System.out.println("Vehicle with the vin number of : " + vinNum + " was not found");
+        }
+        System.out.println("Press enter to return to the main menu");
+        theScanner.nextLine();
 
 
     }
-
-    public void processRemoveVehicleRequest(){}
 
     private void init(){
         //created the DFM
